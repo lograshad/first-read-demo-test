@@ -1,0 +1,26 @@
+{
+  "name": "first-read",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "postinstall": "turbo run generate --filter=web",
+    "infra:up": "docker-compose -f infra/local/compose.yml -p first-read --env-file infra/local/.env up -d",
+    "infra:down": "docker-compose -f infra/local/compose.yml -p first-read --env-file infra/local/.env down"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.0",
+    "turbo": "^2.5.4",
+    "typescript": "5.8.2"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@tanstack/react-virtual": "^3.13.12"
+  }
+}

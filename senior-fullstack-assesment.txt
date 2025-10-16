@@ -1,0 +1,31 @@
+Aug 2025
+Full-stack Engineer – Home Assignment
+Goal: Build an MVP for an AI contract generator
+You will create an app where users describe their business context in plain language and receive
+a properly formatted, complete contract (10+ pages) aligned to their request in HTML format.
+We're excited to see how you tackle the challenge of architecting real-time systems that deliver
+AI-generated content efficiently.
+Examples of such output are these Terms of Service:
+• https://www.perplexity.ai/hub/legal/terms-of-service
+• https://www.zoom.com/en/trust/terms/
+What Success Looks Like
+A user types in "Draft terms of service for a cloud cyber SaaS company based in New York" and
+gets the terms document streaming back with section numbering and styling in HTML
+formatting.
+- Technical: Document streams smoothly, handles failures gracefully
+- Quality: Consistent terminology, proper legal structure
+- UX: Feels fast and responsive to users
+Implementation Approach
+Frontend - Keep it minimal. A text area with generate/stop button, content display area, and
+download button. Focus your effort on the backend architecture and real-time delivery.
+Backend - Use AWS serverless free tier and credits, or whatever works best for you, to handle
+production challenges: token limits, API failures, and latency. Setting up accounts, API keys,
+and service integrations is part of the work.
+AI Tools - Use whatever tools help you move faster. Cursor, Claude Code, GitHub Copilot -
+leverage them to focus on architecture and problem-solving rather than boilerplate.
+What to Submit
+• Private GitHub Repo: frontend + backend.
+• Readme: deploy steps, env vars, architecture bullets/diagram, tradeoffs.
+• Deployment: Prefer a hosted demo (Vercel/Amplify etc.). However, local run is
+acceptable - just provide clear start commands in the README.
+Have questions? Just ask - we're happy to clarify anything.

@@ -1,0 +1,163 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Font utility */
+.font-inter {
+  font-family: "Inter";
+}
+
+/* Layout and base styles */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.imgDark {
+  display: none;
+}
+
+/* Light/dark image switching */
+html {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+/* .text-red {
+  color: var(--red);
+} */
+@media (prefers-color-scheme: dark) {
+  html:not(.dark) {
+    color-scheme: dark;
+  }
+  .imgLight {
+    display: none;
+  }
+  .imgDark {
+    display: unset;
+  }
+}
+
+.dynamic-input {
+  field-sizing: content;
+  padding-right: 7px;
+}
+
+.dynamic-input::-webkit-scrollbar {
+  width: 2px;
+  background: transparent;
+  /* make scrollbar transparent */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- THEME TOKENS: These must be at the END for highest priority --- */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+.loader {
+  position: relative;
+  width: 2.5em;
+  height: 2.5em;
+  transform: rotate(165deg);
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.25em;
+  transform: translate(-50%, -50%);
+}
+
+.loader:before {
+  animation: before 2s infinite;
+}
+
+.loader:after {
+  animation: after 2s infinite;
+}
+
+@keyframes before {
+  0% {
+    width: 0.5em;
+    box-shadow:
+      1em -0.75em hsla(358, 45%, 58%, 0.75),
+      -1em 0.75em hsla(206, 32%, 44%, 0.75);
+  }
+  35% {
+    width: 2.5em;
+    box-shadow:
+      0 -0.75em hsla(358, 45%, 58%, 0.75),
+      0 0.75em hsla(206, 32%, 44%, 0.75);
+  }
+  70% {
+    width: 0.5em;
+    box-shadow:
+      -1em -0.75em hsla(358, 45%, 58%, 0.75),
+      1em 0.75em hsla(206, 32%, 44%, 0.75);
+  }
+  100% {
+    box-shadow:
+      1em -0.75em hsla(358, 45%, 58%, 0.75),
+      -1em 0.75em hsla(206, 32%, 44%, 0.75);
+  }
+}
+
+@keyframes after {
+  0% {
+    height: 0.5em;
+    box-shadow:
+      0.75em 1em hsla(129, 25%, 52%, 0.75),
+      -0.75em -1em hsla(27, 54%, 55%, 0.75);
+  }
+  35% {
+    height: 2.5em;
+    box-shadow:
+      0.75em 0 hsla(129, 25%, 52%, 0.75),
+      -0.75em 0 hsla(27, 54%, 55%, 0.75);
+  }
+  70% {
+    height: 0.5em;
+    box-shadow:
+      0.75em -1em hsla(129, 25%, 52%, 0.75),
+      -0.75em 1em hsla(27, 54%, 55%, 0.75);
+  }
+  100% {
+    box-shadow:
+      0.75em 1em hsla(129, 25%, 52%, 0.75),
+      -0.75em -1em hsla(27, 54%, 55%, 0.75);
+  }
+}
