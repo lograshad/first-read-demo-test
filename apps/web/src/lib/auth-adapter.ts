@@ -130,7 +130,6 @@ export function PrismaAdapter(): Adapter {
       userId: string;
       expires: Date;
     }): Promise<AdapterSession> {
-      console.log("createSession called with:", params);
       return {
         sessionToken: params.sessionToken,
         userId: params.userId,
@@ -162,7 +161,6 @@ export function PrismaAdapter(): Adapter {
       expires: Date;
       token: string;
     }): Promise<VerificationToken | null | undefined> {
-      console.log("createVerificationToken called with:", params);
       return {
         identifier: params.identifier,
         expires: params.expires,

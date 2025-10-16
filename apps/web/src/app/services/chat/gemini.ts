@@ -104,14 +104,12 @@ export async function geminiChatStream({
       });
 
     if (abortSignal?.aborted) {
-      console.log("Stream aborted before processing");
       return { response: finalResponse, billableTokens };
     }
 
     try {
       for await (const chunk of stream) {
         if (abortSignal?.aborted) {
-          console.log("Stream processing aborted during chunk processing");
           break;
         }
 

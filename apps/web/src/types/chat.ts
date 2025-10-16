@@ -8,7 +8,7 @@ interface ChatPart {
 }
 
 export interface ChatMessagePart extends ChatPart {
-  text: string; // Make text required for message parts
+  text: string; 
 }
 
 

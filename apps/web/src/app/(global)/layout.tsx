@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { SidebarProvider } from "@repo/ui/components/sidebar";
 import { AppSidebar } from "@/components/molecules/app-sidebar";
+import { TopBar } from "@/components/molecules/top-bar";
 
 export default async function GlobalLayout({
   children,
@@ -17,14 +18,11 @@ export default async function GlobalLayout({
     redirect("/login");
   }
 
-
-
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
-      <div className="relative flex h-screen w-full items-start justify-start">
-        {/* todo, need topbar */}
-        {/* <TopBar /> */}
+      <div className="relative flex h-screen w-full flex-col items-start justify-start">
+        <TopBar />
         <div className="h-full w-full overflow-auto bg-bg-base px-4 md:px-2">
           {children}
         </div>

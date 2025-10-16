@@ -18,9 +18,6 @@ import {
 } from "@repo/ui/components/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
-import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
 import ChatHistory from "./chat-history";
 
 export function AppSidebar() {
@@ -36,22 +33,6 @@ export function AppSidebar() {
     },
   ];
 
-  const queryClient = useQueryClient();
-
-
-  // todo: move this later
-  const handleSignOut = async () => {
-    toast.loading("Signing out...");
-    await signOut({
-      redirect: true,
-      callbackUrl: "/login",
-    });
-    queryClient.clear();
-    localStorage.clear();
-    toast.success("Signed out successfully");
-    toast.dismiss();
-  };
-
   return (
     <Sidebar
       collapsible="icon"
@@ -64,7 +45,7 @@ export function AppSidebar() {
               className={`flex items-center ${open || isMobile ? "justify-between" : "justify-center"}`}
             >
               <Bars3Icon
-                className="cursor-pointer hidden md:block size-4 text-icon-label stroke-[1.5px]"
+                className="cursor-pointer hidden md:block size-5 mt-3 text-icon-label stroke-[1.8px]"
                 onClick={() => {
                   toggleSidebar();
                 }}

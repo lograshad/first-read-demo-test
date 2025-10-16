@@ -4,7 +4,7 @@ import type { UserResponseDto } from "@/lib/dtos/user";
 
 export class UserService {
   /**
-   * Create a new user with hashed password
+   * Create a new user
    */
   static async createUser(data: {
     email: string;
@@ -19,15 +19,12 @@ export class UserService {
     });
 
     if (existingUser) {
-      // If user exists and is NOT deleted, throw error
       if (!existingUser.deleted_at) {
         if (email && existingUser.email === email) {
           throw new Error("An error occured while creating user");
         }
       }
 
-      // If user exists but IS deleted, we'll reuse their record for fresh start
-      // Clear all old data and give them a completely fresh start
       const hashedPassword = await hashPassword(password);
 
       const updatedUser = await prisma.user.update({
@@ -40,14 +37,11 @@ export class UserService {
         },
       });
 
-      // Return user without password, ensuring it matches UserResponseDto
       return updatedUser;
     }
 
-    // Hash the password
     const hashedPassword = await hashPassword(password);
 
-    // Create the user
     const user = await prisma.user.create({
       data: {
         id: crypto.randomUUID(),
@@ -56,12 +50,11 @@ export class UserService {
       },
     });
 
-    // Return user without password, ensuring it matches UserResponseDto
     return user;
   }
 
   /**
-   * Get user by ID
+   * Get user by id
    */
   static async getUserById(id: string): Promise<UserResponseDto | null> {
     const user = await prisma.user.findUnique({
@@ -72,7 +65,6 @@ export class UserService {
       return null;
     }
 
-    // Return user without password, ensuring it matches UserResponseDto
     return user;
   }
 
@@ -88,13 +80,12 @@ export class UserService {
       return null;
     }
 
-    // Return user without password, ensuring it matches UserResponseDto
     return user;
   }
 
 
   /**
-   * Get user by email including password (for authentication)
+   * Get user by email
    */
   static async getUserByEmailWithPassword(email: string) {
     return prisma.user.findUnique({
@@ -103,7 +94,7 @@ export class UserService {
   }
 
   /**
-   * Get all active users with pagination (excludes deleted users)
+   * Get all users with pagination
    */
   static async getUsers(page: number = 1, limit: number = 10) {
     const skip = (page - 1) * limit;

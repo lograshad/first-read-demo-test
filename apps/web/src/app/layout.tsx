@@ -22,7 +22,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "First Read",
-  description: "First Read is a platform for generating terms and conditions for your business",
+  description:
+    "First Read is a platform for generating terms and conditions for your business",
   icons: "/logo.png",
 };
 
@@ -30,18 +31,23 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html suppressHydrationWarning lang='en'>
+    <html suppressHydrationWarning lang="en">
       <head>
         <link {...fontLink} />
       </head>
       <body className={`${inter.variable} h-full`}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <ThemeAwareTopLoader />
-            <Providers>
-              {children}
-              <Toaster richColors closeButton position="top-center" />
-            </Providers>
-          </ThemeProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ThemeAwareTopLoader />
+          <Providers>
+            {children}
+            <Toaster richColors closeButton position="top-center" />
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

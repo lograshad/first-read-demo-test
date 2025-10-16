@@ -8,7 +8,6 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { AnimatePresence, motion } from "framer-motion";
 import MarkdownRenderer from "@/components/molecules/markdown-renderer";
-// import Logo from "@/components/atoms/dynamic-icons/logo";
 import {
   Square2StackIcon,
   CodeBracketIcon,
@@ -127,39 +126,33 @@ export default function ChatThreadPage() {
     const toastId = toast.loading("Generating PDF...");
 
     try {
-      // Create a temporary container
       const container = document.createElement("div");
       container.style.position = "absolute";
       container.style.left = "-9999px";
-      container.style.width = "210mm"; // A4 width
+      container.style.width = "210mm";
       container.innerHTML = htmlContent;
       document.body.appendChild(container);
 
-      // Convert HTML to canvas
       const canvas = await html2canvas(container, {
         scale: 1.5,
         useCORS: true,
         logging: false,
       });
 
-      // Remove temporary container
       document.body.removeChild(container);
 
-      // Calculate PDF dimensions
-      const imgWidth = 210; // A4 width in mm
-      const pageHeight = 297; // A4 height in mm
+      const imgWidth = 210;
+      const pageHeight = 297;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       let heightLeft = imgHeight;
 
       const pdf = new jsPDF("p", "mm", "a4");
       let position = 0;
 
-      // Add image to PDF with JPEG compression for smaller file size
       const imgData = canvas.toDataURL("image/jpeg", 0.85);
       pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
 
-      // Add additional pages if needed
       while (heightLeft > 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
@@ -167,7 +160,6 @@ export default function ChatThreadPage() {
         heightLeft -= pageHeight;
       }
 
-      // Save PDF
       const filename = `terms-of-service-${new Date().toISOString().split("T")[0]}.pdf`;
       pdf.save(filename);
 
@@ -203,10 +195,9 @@ export default function ChatThreadPage() {
               >
                 <div className="flex grow flex-col space-y-2">
                   <div
-                    className={`prose prose-sm max-w-none text-sm font-normal text-text-title -tracking-[0.5%] leading-[150%] dark:prose-invert  ${userMsg ? "w-fit ml-auto" : "min-w-full"}`}
+                    className={`prose prose-sm max-w-none text-xs font-normal text-text-title -tracking-[0.5%] leading-[150%] dark:prose-invert  ${userMsg ? "w-fit ml-auto" : "min-w-full"}`}
                   >
                     <div className="flex flex-col items-end gap-y-1">
-                      {/* image from user here if userMsg is true */}
                       <div
                         className={`min-h-[53px] ${userMsg ? "rounded-l-full rounded-r-full bg-bg-light2 w-fit flex items-center justify-center px-4" : "w-full"}`}
                       >
@@ -216,9 +207,12 @@ export default function ChatThreadPage() {
                   </div>
                   {isStreaming && index === threadHistory.length - 1 && (
                     <div
-                      className={`mr-auto flex w-fit justify-start text-primary`}
+                      className={`mr-auto flex w-fit justify-start text-primary items-center gap-2`}
                     >
-                      <div className="loader"></div>
+                      <div className="loader"></div>{" "}
+                      <span className="text-xs font-medium text-text-label">
+                        Generating...
+                      </span>
                     </div>
                   )}
                   {!isStreaming && !userMsg && (

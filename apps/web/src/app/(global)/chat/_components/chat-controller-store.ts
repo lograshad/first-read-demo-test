@@ -9,7 +9,6 @@ export const chatControllerStore = {
     controller: AbortController;
   }) {
     this.controllers.set(chatId, controller);
-    console.log(`Stored controller for chat ${chatId}`);
   },
 
   getController(chatId: string): AbortController | undefined {
@@ -18,6 +17,5 @@ export const chatControllerStore = {
 
   removeController(chatId: string) {
     this.controllers.delete(chatId);
-    console.log(`Removed controller for chat ${chatId}`);
   },
 };

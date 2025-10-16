@@ -27,10 +27,8 @@ export const { auth, handlers } = NextAuth({
 
           let user = null;
 
-          // Check if login is via email
           if (email) {
             const { default: prisma } = await import("./lib/prisma");
-            // Find user in database with password
             user = await prisma.user.findUnique({
               where: { email: email as string, deleted_at: null },
             });
@@ -38,12 +36,10 @@ export const { auth, handlers } = NextAuth({
             return null;
           }
 
-          // Check if user exists and is active
           if (!user || user.deleted_at) {
             return null;
           }
 
-          // If user exists but has no password, signal special error for UI to offer set-password
           if (!user.password) {
             const err = new Error("PASSWORD_NOT_SET") as Error & {
               code?: string;
@@ -52,7 +48,6 @@ export const { auth, handlers } = NextAuth({
             throw err;
           }
 
-          // Verify password
           const isPasswordValid = await comparePassword(
             password as string,
             user.password
@@ -61,7 +56,6 @@ export const { auth, handlers } = NextAuth({
             return null;
           }
 
-          // Return user object for NextAuth
           return {
             id: user.id,
             email: user.email,
@@ -69,7 +63,6 @@ export const { auth, handlers } = NextAuth({
           };
         } catch (error) {
           console.error("Authorization error:", error);
-          // Re-throw so NextAuth surfaces error for client to handle (we'll map to UI states)
           throw error;
         }
       },
@@ -85,7 +78,7 @@ export const { auth, handlers } = NextAuth({
     async jwt({ token, user, trigger }) {
       if (trigger === "update" || user) {
         token.id = user?.id ?? token.id;
-        token.name = user?.name ?? token.name;
+        token.name = user?.full_name ?? token.name;
         token.email = user?.email ?? token.email;
       }
       return token;
@@ -93,7 +86,7 @@ export const { auth, handlers } = NextAuth({
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id as string;
-        session.user.name = token.name as string;
+        session.user.name = token.full_name as string;
       }
       return session;
     },

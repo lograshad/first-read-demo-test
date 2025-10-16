@@ -4,7 +4,6 @@ const nextConfig = {
     optimizePackageImports: ["@repo/ui"],
   },
   // Exclude heavy packages from Edge middleware bundle
-  // todo: revisit this later
   webpack: (config, { isServer, nextRuntime }) => {
     if (nextRuntime === "edge") {
       config.resolve.alias = {

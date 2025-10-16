@@ -148,7 +148,6 @@ export default function useChat() {
 
       while (true) {
         if (isCancelledRef.current) {
-          // reader.cancel();
           break;
         }
 
@@ -156,7 +155,6 @@ export default function useChat() {
         if (done) break;
         const text = decoder.decode(value, { stream: true });
         response += text;
-        console.log(text);
         updateLastMessage(response);
       }
       setRetry(false);

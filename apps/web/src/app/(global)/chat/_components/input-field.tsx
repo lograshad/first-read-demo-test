@@ -53,11 +53,17 @@ export default function InputField() {
           }
         }}
         disabled={chatLoading}
-        placeholder="Type your message here..."
+        placeholder="Type your prompt here..."
         className={`${pathname.includes("new") ? "min-h-[48px] md:min-h-[37px]" : "min-h-[100px] md:min-h-[89px]"} transition-all duration-500 ease-in-out dynamic-input max-h-[250px] placeholder:text-sm w-full resize-none border-none bg-transparent focus:outline-none focus:ring-0 text-sm text-text-title placeholder:text-text-caption`}
       />
       <div className="flex w-full items-center justify-between">
-        <PlusIcon className="size-3.5 invisible stroke-[1.5px] text-icon-dark cursor-pointer" />
+        {chatLoading ? (
+          <div className="text-xs font-medium text-text-label">
+            Generating...
+          </div>
+        ) : (
+          <PlusIcon className="size-3.5 invisible stroke-[1.5px] text-icon-dark cursor-pointer" />
+        )}
         <button
           disabled={!inputMessage}
           type="button"

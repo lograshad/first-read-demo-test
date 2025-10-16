@@ -40,12 +40,11 @@ export default function LoginPage() {
       });
       if (res?.error) {
         setLoginLoading(false);
-        // todo: placeholder error message, replace with actual error message
         toast.error("An error occured");
         return;
       }
 
-      toast.success("Welcome back to Onyx");
+      toast.success("Welcome back to First Read!");
 
       const session = await getSession();
 
@@ -56,7 +55,6 @@ export default function LoginPage() {
       router.push("/");
     } catch (error) {
       setLoginLoading(false);
-      // todo: placeholder error message, replace with actual error message
       toast.error(error instanceof Error ? error.message : "An error occured");
       return;
     }
