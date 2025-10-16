@@ -17,8 +17,8 @@ interface ChatResponse {
 
 export const createGeminiModel = () => {
   return new ChatGoogleGenerativeAI({
-    model: "gemini-2.0-flash",
-    maxOutputTokens: 32768,
+    model: "gemini-2.5-flash-lite",
+    maxOutputTokens: 50768,
     temperature: 0,
     apiKey: process.env.GEMINI_API_KEY,
   });
@@ -54,7 +54,7 @@ export async function geminiChatStream({
   billableTokens.total += inputTokens;
 
   const streamingChatModel = new ChatGoogleGenerativeAI({
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash-lite",
     maxOutputTokens: 32768,
     temperature: 0,
     streaming: true,

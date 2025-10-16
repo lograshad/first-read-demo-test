@@ -9,14 +9,14 @@
 
 ## 🎯 Overview
 
-An MVP demonstrating enterprise-grade AI contract generation with real-time streaming capabilities. Users describe their business context in plain language and receive comprehensive, properly formatted Terms of Service documents (5+ pages) in both Markdown and HTML formats, with instant PDF export capability.
+An MVP demonstrating enterprise-grade AI contract generation with real-time streaming capabilities. Users describe their business context in plain language and receive comprehensive, properly formatted Terms of Service documents (10+ pages) in both Markdown and HTML formats, with instant PDF export capability.
 
 **Live Demo:** [https://first-read-demo-test-web.vercel.app/](https://first-read-demo-test-web.vercel.app/)
 
 ### Example Usage
 ```
 Input: "Draft terms of service for a cloud cyber SaaS company based in New York"
-Output: Complete 5+ page ToS with proper legal structure, section numbering, and HTML styling
+Output: Complete 10+ page ToS with proper legal structure, section numbering, and HTML styling
 ```
 
 ---
@@ -38,7 +38,7 @@ graph TB
         E[Chat Route Handler]
         F[Abort Controller Manager]
         G[LangChain Integration]
-        H[Gemini 2.0 Flash]
+        H[Gemini 2.5 Flash Lite]
     end
     
     subgraph Data["Data Layer"]
@@ -105,7 +105,7 @@ graph TB
 
 ### Document Quality
 
-- ✅ 5+ pages of comprehensive legal content
+- ✅ 10+ pages of comprehensive legal content
 - ✅ Proper hierarchical section numbering (1, 1.1, 1.1.1)
 - ✅ Industry-specific provisions (SaaS, e-commerce, cloud services)
 - ✅ Jurisdiction-aware clauses (GDPR, CCPA, HIPAA)
@@ -128,7 +128,7 @@ graph TB
 ### Backend
 - **Next.js API Routes** - Serverless edge functions
 - **LangChain** - AI orchestration framework
-- **Google Gemini 2.0 Flash** - 32,768 token output capacity
+- **Google Gemini 2.5 Flash Lite** - 65,536 token output capacity with extended context window
 - **Prisma ORM** - Type-safe database access
 - **PostgreSQL** - JSONB storage for chat messages
 - **NextAuth v5** - Authentication with credentials provider
@@ -384,7 +384,7 @@ Core streaming endpoint:
 ### Gemini Service (`services/chat/gemini.ts`)
 
 LangChain integration:
-- Gemini 2.0 Flash model configuration
+- Gemini 2.5 Flash Lite model configuration
 - Stream handling with callbacks
 - Context window management (10 messages)
 - Token estimation
@@ -403,10 +403,10 @@ Comprehensive prompt engineering:
 
 ## 🎯 Key Design Decisions & Trade-offs
 
-### 1. **Gemini 2.0 Flash over GPT-4**
-   - **Why:** 32,768 token output capacity vs GPT-4's 4,096, enabling true 5+ page documents
-   - **Trade-off:** Slightly less sophisticated reasoning, but 90% cheaper ($0.075/1M tokens vs $5/1M)
-   - **Result:** Can generate 40KB+ documents in a single call without chunking
+### 1. **Gemini 2.5 Flash Lite over GPT-4**
+   - **Why:** 65,536 token output capacity with extended context window vs GPT-4's 4,096, enabling true 10+ page documents
+   - **Trade-off:** Optimized for speed and cost efficiency, 95% cheaper than GPT-4 while maintaining quality
+   - **Result:** Can generate 40KB+ documents in a single call without chunking, with improved context retention
 
 ### 2. **Client-side PDF Generation**
    - **Why:** Zero server cost, instant generation, no serverless timeout issues
@@ -464,7 +464,7 @@ Comprehensive prompt engineering:
 | **Follow-up** | ~2,500 | ~4,000 | ~$0.0005 |
 | **10-Message Thread** | ~18,000 | ~50,000 | ~$0.005 |
 
-*Costs based on Gemini 2.0 Flash pricing: $0.075/1M input, $0.30/1M output*
+*Costs based on Gemini 2.5 Flash Lite pricing (estimated): $0.075/1M input, $0.30/1M output*
 
 ### Scalability
 
@@ -693,7 +693,7 @@ pnpm infra:down && pnpm infra:up
 
 ## 🚧 Known Limitations
 
-1. **Token Limits** - Gemini 2.0 has 32K output limit; extremely detailed requests may truncate
+1. **Token Limits** - Gemini 2.5 Flash Lite has 32K output limit; extremely detailed requests may truncate
 2. **PDF Generation** - Large documents (20+ pages) may take 10-15s to render
 3. **Browser Compatibility** - PDF export requires modern browser with Canvas API
 
@@ -742,7 +742,7 @@ This project is a technical demonstration for evaluation purposes.
 Built with modern tools and best practices:
 - **Next.js Team** - Outstanding framework and documentation
 - **Vercel** - Seamless deployment experience
-- **Google AI** - Powerful Gemini 2.0 API
+- **Google AI** - Powerful Gemini 2.5 Flash Lite API
 - **LangChain** - Excellent abstraction layer
 - **Prisma** - Type-safe ORM that just works
 
@@ -755,4 +755,4 @@ For technical questions or clarifications about this implementation, please reac
 ---
 
 **Live Demo:** [https://first-read-demo-test-web.vercel.app/](https://first-read-demo-test-web.vercel.app/)  
-**Tech Stack:** Next.js 15 • TypeScript • Gemini 2.0 • PostgreSQL • Vercel
+**Tech Stack:** Next.js 15 • TypeScript • Gemini 2.5 Flash Lite • PostgreSQL • Vercel

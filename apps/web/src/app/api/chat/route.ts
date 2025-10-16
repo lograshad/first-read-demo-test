@@ -5,7 +5,7 @@ import { activeChatControllers } from "@/lib/active-chat-controller";
 import prisma from "@/lib/prisma";
 import { z } from "zod";
 
-const SUPPORTED_MODELS = ["gpt-4o-mini", "gemini-2.0-flash"] as const;
+const SUPPORTED_MODELS = ["gpt-4o-mini", "gemini-2.5-flash-lite"] as const;
 
 const chatInputSchema = z.object({
   message: z.string(),

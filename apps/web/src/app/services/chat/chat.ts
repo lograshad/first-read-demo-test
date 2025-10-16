@@ -10,7 +10,7 @@ export async function sendChat({
   const body = JSON.stringify({
     message,
     chatId,
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash-lite",
   });
 
   const response = await fetch("/api/chat", {
