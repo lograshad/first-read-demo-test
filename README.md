@@ -128,7 +128,7 @@ graph TB
 ### Backend
 - **Next.js API Routes** - Serverless edge functions
 - **LangChain** - AI orchestration framework
-- **Google Gemini 2.5 Flash Lite** - 65,536 token output capacity with extended context window
+- **Google Gemini 2.5 Flash Lite** - 32,768 token output capacity with extended context window
 - **Prisma ORM** - Type-safe database access
 - **PostgreSQL** - JSONB storage for chat messages
 - **NextAuth v5** - Authentication with credentials provider
@@ -139,6 +139,7 @@ graph TB
 - **Docker Compose** - Local PostgreSQL containerization
 - **Vercel** - Zero-config deployment platform
 - **ESLint + Prettier** - Code quality enforcement
+- **Vitest** - Modern testing framework with coverage reporting
 
 ### Export Capabilities
 - **html2canvas** - DOM to canvas rendering
@@ -497,6 +498,10 @@ Comprehensive prompt engineering:
 | `pnpm start` | Start production server |
 | `pnpm lint` | Run ESLint with zero warnings enforcement |
 | `pnpm check-types` | TypeScript type checking without emit |
+| `pnpm test` | Run tests in watch mode |
+| `pnpm test:ui` | Run tests with interactive UI |
+| `pnpm test:coverage` | Run tests with coverage report |
+| `pnpm test:run` | Run tests once (CI mode) |
 | `pnpm generate` | Generate Prisma client |
 | `pnpm migrate` | Run database migrations (dev) |
 | `pnpm migrate:deploy` | Deploy migrations (production) |
@@ -505,9 +510,41 @@ Comprehensive prompt engineering:
 
 ---
 
-## 🧪 Testing the System
+## 🧪 Testing
 
-### Test Scenarios
+### Automated Tests
+
+The project includes comprehensive unit and integration tests using **Vitest**:
+
+```bash
+# Run tests in watch mode
+cd apps/web
+pnpm test
+
+# Run tests with UI
+pnpm test:ui
+
+# Generate coverage report
+pnpm test:coverage
+```
+
+**Test Coverage:**
+- ✅ Password hashing and comparison utilities
+- ✅ System instruction generation
+- ✅ Database operations with Prisma mocking
+- ✅ API route validation and authentication
+- ✅ Utility functions (class name merging, etc.)
+
+**Test Files:**
+- `src/lib/__tests__/password.test.ts` - Password utility tests
+- `src/lib/__tests__/utils.test.ts` - Helper function tests
+- `src/app/services/chat/__tests__/instructions.test.ts` - Prompt generation tests
+- `src/app/services/chat/__tests__/langchain.test.ts` - Chat service tests
+- `src/app/api/chat/__tests__/route.test.ts` - API endpoint tests
+
+For detailed testing documentation, see [`apps/web/TESTING.md`](apps/web/TESTING.md).
+
+### Manual Test Scenarios
 
 **1. Basic Generation:**
 ```
