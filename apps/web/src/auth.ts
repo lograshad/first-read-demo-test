@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import prisma from "./lib/prisma";
 import { comparePassword } from "./lib/password";
 
 export const { auth, handlers } = NextAuth({
@@ -30,7 +29,7 @@ export const { auth, handlers } = NextAuth({
 
           // Check if login is via email
           if (email) {
-
+            const { default: prisma } = await import("./lib/prisma");
             // Find user in database with password
             user = await prisma.user.findUnique({
               where: { email: email as string, deleted_at: null },
