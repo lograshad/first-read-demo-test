@@ -27,29 +27,41 @@ Output: Complete 5+ page ToS with proper legal structure, section numbering, and
 
 ```mermaid
 graph TB
-    subgraph "Client Layer"
-        A[Next.js 15 App Router] --> B[React Components]
-        B --> C[Zustand State Management]
-        C --> D[Real-time Stream Handler]
+    subgraph Client["Client Layer"]
+        A[Next.js 15 App Router]
+        B[React Components]
+        C[Zustand State Management]
+        D[Real-time Stream Handler]
     end
     
-    subgraph "API Layer"
-        E[/api/chat Route Handler] --> F[Abort Controller Manager]
-        F --> G[LangChain Integration]
-        G --> H[Gemini 2.0 Flash]
+    subgraph API["API Layer"]
+        E[Chat Route Handler]
+        F[Abort Controller Manager]
+        G[LangChain Integration]
+        H[Gemini 2.0 Flash]
     end
     
-    subgraph "Data Layer"
-        I[(PostgreSQL + Prisma)] --> J[Chat History]
-        I --> K[User Sessions]
-        L[NextAuth v5] --> K
+    subgraph Data["Data Layer"]
+        I[(PostgreSQL + Prisma)]
+        J[Chat History]
+        K[User Sessions]
+        L[NextAuth v5]
     end
     
-    subgraph "Output Processing"
-        M[Dual-Format Parser] --> N[Markdown Renderer]
-        M --> O[HTML w/ Inline Styles]
-        O --> P[Client-side PDF Export]
+    subgraph Output["Output Processing"]
+        M[Dual-Format Parser]
+        N[Markdown Renderer]
+        O[HTML with Inline Styles]
+        P[Client-side PDF Export]
     end
+    
+    A --> B --> C --> D
+    E --> F --> G --> H
+    I --> J
+    I --> K
+    L --> K
+    M --> N
+    M --> O --> P
     
     D -->|HTTP POST| E
     E -->|Stream Response| D
