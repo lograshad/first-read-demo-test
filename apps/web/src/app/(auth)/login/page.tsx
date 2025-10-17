@@ -52,7 +52,7 @@ export default function LoginPage() {
         throw new Error("Error signing in. Please try again.");
       }
 
-      router.push("/");
+      router.push("/new");
     } catch (error) {
       setLoginLoading(false);
       toast.error(error instanceof Error ? error.message : "An error occured");
