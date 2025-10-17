@@ -13,6 +13,15 @@ An MVP demonstrating enterprise-grade AI contract generation with real-time stre
 
 **Live Demo:** [https://first-read-demo-test-web.vercel.app/](https://first-read-demo-test-web.vercel.app/)
 
+The database is seeded with test users. You can login with any of these accounts:
+
+| Email | Password | Name |
+|-------|----------|------|
+| `test@example.com` | `password123` | Adam Smith |
+| `business@example.com` | `password123` | John Doe |
+| `admin@example.com` | `admin123` | Admin User |
+| `demo@example.com` | `demo123` | Demo User |
+
 ### Example Usage
 ```
 Input: "Draft terms of service for a cloud cyber SaaS company based in New York"
