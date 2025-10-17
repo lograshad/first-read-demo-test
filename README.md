@@ -787,7 +787,7 @@ Built with modern tools and best practices:
 
 ## 📞 Questions?
 
-For technical questions or clarifications about this implementation, please reach out through the whatsapp communication channels.
+For technical questions or clarifications about this implementation, please reach out through the whatsapp communication channel or reach out to me at akintola.rd@gmail.com.
 
 ---
 
